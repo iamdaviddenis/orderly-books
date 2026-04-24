@@ -1,0 +1,17 @@
+{
+  "name": "Orderly Books",
+  "short_name": "Orderly",
+  "description": "A behavior-first personal finance app that organizes money by priority.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f4ee",
+  "theme_color": "#1b2438",
+  "icons": [
+    {
+      "src": "/orderly-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

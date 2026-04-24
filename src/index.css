@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  --bg: 247 244 238;
+  --panel: 255 251 247;
+  --text: 27 36 56;
+  --muted: 104 111 132;
+  --border: 224 214 198;
+
+  --t1: 220 75 67;
+  --t2: 42 153 92;
+  --t3: 214 159 42;
+  --t4: 121 136 164;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 16 18 26;
+    --panel: 27 31 43;
+    --text: 237 241 248;
+    --muted: 163 172 189;
+    --border: 54 62 81;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background: rgb(var(--bg));
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  background:
+    radial-gradient(circle at top left, rgba(204, 168, 120, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(42, 153, 92, 0.12), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(247, 244, 238, 0.94)),
+    rgb(var(--bg));
+  color: rgb(var(--text));
+  font-family:
+    "Avenir Next",
+    "Segoe UI Variable Text",
+    "Segoe UI",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100%;
+}
+
+::selection {
+  background: rgba(42, 153, 92, 0.18);
+  color: rgb(var(--text));
+}
