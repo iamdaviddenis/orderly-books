@@ -119,11 +119,12 @@ Use the Supabase SQL Editor.
 npm run dev
 ```
 
-Then sign in with your existing account.
+Then create an account or sign in with an existing one.
 
 ### Notes
 
-- Account creation is currently disabled in the app UI
+- New users can create their own email/password account
+- Supabase row-level security keeps each user's data private
 - Local storage remains available as offline cache
 - Sign out is available in **Settings**
 

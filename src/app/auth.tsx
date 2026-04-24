@@ -4,6 +4,7 @@ import type { Session, User } from '@supabase/supabase-js'
 import { isSupabaseEnabled, supabase } from '../data/supabaseClient'
 
 type AuthResult = { ok: true } | { ok: false; error: string }
+type SignUpResult = { ok: true; needsEmailConfirmation?: boolean; message?: string } | { ok: false; error: string }
 
 type AuthContextValue = {
   enabled: boolean
@@ -11,7 +12,7 @@ type AuthContextValue = {
   session: Session | null
   user: User | null
   signInWithPassword: (email: string, password: string) => Promise<AuthResult>
-  signUpWithPassword: (email: string, password: string) => Promise<AuthResult>
+  signUpWithPassword: (email: string, password: string) => Promise<SignUpResult>
   signOut: () => Promise<AuthResult>
 }
 
@@ -72,9 +73,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
       signUpWithPassword: async (email, password) => {
         if (!supabase) return { ok: false, error: 'Supabase is not configured.' }
-        const { error } = await supabase.auth.signUp({ email, password })
+        const { data, error } = await supabase.auth.signUp({ email, password })
         if (error) return { ok: false, error: error.message }
-        return { ok: true }
+        const needsEmailConfirmation = !data.session
+        return {
+          ok: true,
+          needsEmailConfirmation,
+          message: needsEmailConfirmation
+            ? 'Account created. Check your email to confirm your account before signing in.'
+            : 'Account created. You are now signed in.',
+        }
       },
       signOut: async () => {
         if (!supabase) return { ok: true }

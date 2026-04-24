@@ -16,10 +16,18 @@ This enables Row Level Security so each user can only read/write their own row.
 - Supabase Dashboard → Authentication → Providers
 - Enable **Email** (password).
 
-## 3b) Disable public signups (recommended for single-user)
-If you want **only your existing account** to access the app:
+## 3b) Choose your access mode
+
+### Public multi-user app
+If you want anyone to create their own Orderly Books account:
+- Leave new user signups **enabled**
+- Keep email/password auth enabled
+- Optionally require email confirmation in Supabase Auth settings
+
+### Private or invite-only app
+If you want only selected people to access the app:
 - Supabase Dashboard → Authentication → Settings (or Providers)
-- Turn **off** new user signups / enable **“Disable signups”** (wording varies)
+- Turn **off** new user signups / enable **Disable signups** (wording varies)
 
 You can still add users later via **Invite user** in the Supabase Auth users screen.
 
@@ -39,11 +47,14 @@ npm install
 npm run dev
 ```
 
-## 6) Sign in
-- The app will show a sign-in screen when Supabase is configured.
-- Create an account (email/password), then the app will:
+## 6) Sign in or create an account
+- The app will show an auth screen when Supabase is configured.
+- Users can:
+  - create an account with email/password, or
+  - sign in with an existing account
+- After sign-in, the app will:
   - load cloud state if present, or
-  - create a new cloud row from your local/seed data
+  - create a new cloud row from local/seed data as the user starts saving
 
 ## Notes / limitations (MVP)
 - Sync is “last write wins” (single JSON blob). Avoid editing on two devices at the same time.
